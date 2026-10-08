@@ -1,0 +1,14 @@
+D=10: Friedman chi2=36.200 p=2.6321e-07 | Nemenyi CD=1.761 (k=5, N=12)
+  v1.8       avg_rank=1.167
+  ADSCAv2.1  avg_rank=2.500
+  PSO        avg_rank=2.917
+  wDecay     avg_rank=3.500
+  SCA        avg_rank=4.917
+  CD œ‘÷¯∂‘: ADSCAv2.1 vs SCA (|¶§|=2.42); PSO vs SCA (|¶§|=2.00); SCA vs v1.8 (|¶§|=3.75); v1.8 vs wDecay (|¶§|=2.33)
+D=20: Friedman chi2=34.067 p=7.2209e-07 | Nemenyi CD=1.761 (k=5, N=12)
+  v1.8       avg_rank=1.250
+  ADSCAv2.1  avg_rank=2.500
+  PSO        avg_rank=3.000
+  wDecay     avg_rank=3.333
+  SCA        avg_rank=4.917
+  CD œ‘÷¯∂‘: ADSCAv2.1 vs SCA (|¶§|=2.42); PSO vs SCA (|¶§|=1.92); SCA vs v1.8 (|¶§|=3.67); v1.8 vs wDecay (|¶§|=2.08)

@@ -1,0 +1,51 @@
+{
+  "phase": "Phase 4 formal CEC2022",
+  "algos": [
+    "PSO",
+    "wDecay",
+    "SCA",
+    "v1.8",
+    "ADSCAv2.1"
+  ],
+  "funcs": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "dims": [
+    10,
+    20
+  ],
+  "runs": 30,
+  "N": 50,
+  "budget": {
+    "10": 200000,
+    "20": 500000
+  },
+  "seed_base": 666,
+  "seed_formula": "base + run_id + func_id*100 + dim*1000",
+  "fe_grid_points": 121,
+  "env": {
+    "python": "3.7.6",
+    "numpy": "1.18.1",
+    "opfunu": "1.0.1",
+    "patch": "cec_schwefel_fix loaded"
+  },
+  "code_sha256": {
+    "run_formal_cec2022.py": "0d3966891cbe0a3d9b70e7da02585cd2bca56ca1d4678c407614fc0600f8b50a",
+    "ad_switchboard.py": "5a2fecf8fa33876b5b002055a63674330378b33cec17b3e812393b5652c48d27",
+    "pso_family.py": "80a552012943613c6c8d810b89ed7472b77e5d5ef1e78ff408fa5707108eaca7",
+    "sca_family.py": "b68cf820925e2fc593ee44619020d25444ea50e12dfbad100935ff541e6d9bab",
+    "cec_schwefel_fix.py": "3d322a3fd6ab1310dfcc91d7edc1ed53508d5c7594a122a5d1c2eb46b645db02"
+  },
+  "started": "2026-09-29 17:07:49"
+}
