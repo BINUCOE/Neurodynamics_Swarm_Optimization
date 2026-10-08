@@ -1,0 +1,201 @@
+{
+  "phase": "E2 ablation chain (规范 v3)",
+  "nodes": [
+    "P1",
+    "P2",
+    "S1",
+    "S2",
+    "S3",
+    "P0d",
+    "S0d",
+    "P0r",
+    "S0r"
+  ],
+  "funcs": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "dims": [
+    10,
+    20
+  ],
+  "runs": 30,
+  "N": 50,
+  "budget": {
+    "10": 200000,
+    "20": 500000
+  },
+  "seed_base": 666,
+  "seed_formula": "base + run_id + func_id*100 + dim*1000",
+  "node_table": {
+    "P1": {
+      "cls": "SB_PSO",
+      "flags": {
+        "topology": "ring",
+        "channel": true,
+        "k_adaptive": false,
+        "K": 5,
+        "direction": "mantegna"
+      },
+      "label": "AD-PSO −K自适应",
+      "parent": "P0",
+      "removed": "K自适应（接口层）"
+    },
+    "P2": {
+      "cls": "SB_PSO",
+      "flags": {
+        "topology": "gbest",
+        "channel": true,
+        "k_adaptive": false,
+        "direction": "mantegna"
+      },
+      "label": "AD-PSO −K自适应−环WTA",
+      "parent": "P1",
+      "removed": "环拓扑+局部WTA（基质层）"
+    },
+    "S1": {
+      "cls": "SB_SCA",
+      "flags": {
+        "reference": "ti",
+        "topology": "ring",
+        "channel": true,
+        "boost": true,
+        "kick_timing": "same_gen",
+        "clip_after_kick": true,
+        "k_adaptive": false,
+        "K": 5,
+        "c": 0.7
+      },
+      "label": "AD-SCA −K自适应",
+      "parent": "S0",
+      "removed": "K自适应（接口层）"
+    },
+    "S2": {
+      "cls": "SB_SCA",
+      "flags": {
+        "reference": "ti",
+        "topology": "ring",
+        "channel": false,
+        "kick_timing": "next_gen",
+        "k_adaptive": false,
+        "K": 5,
+        "c": 0.7
+      },
+      "label": "AD-SCA −K自适应−通道",
+      "parent": "S1",
+      "removed": "A累加器通道（核心层）"
+    },
+    "S3": {
+      "cls": "SB_SCA",
+      "flags": {
+        "reference": "ti",
+        "topology": "gbest",
+        "channel": false,
+        "kick_timing": "next_gen",
+        "c": 0.7
+      },
+      "label": "AD-SCA −K自适应−通道−环WTA",
+      "parent": "S2",
+      "removed": "环拓扑+局部WTA（基质层）"
+    },
+    "P0d": {
+      "cls": "SB_PSO",
+      "flags": {
+        "topology": "ring",
+        "channel": true,
+        "k_adaptive": true,
+        "direction": "gauss"
+      },
+      "label": "AD-PSO 方向对照(gauss)",
+      "parent": "P0",
+      "removed": "Lévy方向分布（链外对照）"
+    },
+    "S0d": {
+      "cls": "SB_SCA",
+      "flags": {
+        "reference": "ti",
+        "topology": "ring",
+        "channel": true,
+        "boost": true,
+        "kick_timing": "same_gen",
+        "clip_after_kick": true,
+        "k_adaptive": true,
+        "direction": "gauss",
+        "c": 0.7
+      },
+      "label": "AD-SCA 方向对照(gauss)",
+      "parent": "S0",
+      "removed": "Lévy方向分布（链外对照）"
+    },
+    "P0r": {
+      "cls": "SB_PSO",
+      "flags": {
+        "topology": "ring",
+        "channel": false,
+        "k_adaptive": false,
+        "K": 5
+      },
+      "label": "AD-PSO 全配置−通道(逆序抽查)",
+      "parent": "P0",
+      "removed": "通道（逆序先拆）"
+    },
+    "S0r": {
+      "cls": "SB_SCA",
+      "flags": {
+        "reference": "ti",
+        "topology": "ring",
+        "channel": false,
+        "kick_timing": "next_gen",
+        "k_adaptive": true,
+        "c": 0.7
+      },
+      "label": "AD-SCA 全配置−通道(逆序抽查)",
+      "parent": "S0",
+      "removed": "通道（逆序先拆）"
+    }
+  },
+  "e1_endpoints": {
+    "P0": "v1.8",
+    "P3": "PSO",
+    "S0": "ADSCAv2.1",
+    "S4": "SCA"
+  },
+  "chain_order": {
+    "pso": [
+      "P0",
+      "P1",
+      "P2",
+      "P3"
+    ],
+    "sca": [
+      "S0",
+      "S1",
+      "S2",
+      "S3",
+      "S4"
+    ]
+  },
+  "env": {
+    "python": "3.7.6",
+    "numpy": "1.18.1",
+    "opfunu": "1.0.1",
+    "patch": "cec_schwefel_fix loaded"
+  },
+  "code_sha256": {
+    "run_e2_chain.py": "7257c04879c1b7c9ebc6dfb787c359ce0f62307e63e8a759e9b4ff631f5e5225",
+    "pso_family.py": "80a552012943613c6c8d810b89ed7472b77e5d5ef1e78ff408fa5707108eaca7",
+    "sca_family.py": "b68cf820925e2fc593ee44619020d25444ea50e12dfbad100935ff541e6d9bab",
+    "cec_schwefel_fix.py": "3d322a3fd6ab1310dfcc91d7edc1ed53508d5c7594a122a5d1c2eb46b645db02"
+  },
+  "started": "2026-10-05 18:57:44"
+}
